@@ -4,17 +4,11 @@ template <typename T>
 class sortedList
 {
 public:
-
-    struct node
-    {
-    public:
-        T data;
-        node* next;
-    };
-
     myList(T newData = NULL)
     {
-        data = newData;
+        head = new node();
+        head->data = newData;
+        size++;
     }
     ~myList()
     {
@@ -22,7 +16,15 @@ public:
     }
 
 private:
-    bool* compare;
+    node* head = nullptr;
+    size_t size = 0;
+
+    struct node
+    {
+    public:
+        T data;
+        node* next = nullptr;
+    };
 };
 
 int main()
