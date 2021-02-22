@@ -1,10 +1,13 @@
 ﻿#include <iostream>
 
-template <class T>
-class myList
+template <typename T>
+class sortedList
 {
 public:
-    myList()
+    T data;
+    sortedList* next;
+
+    myList(T newData)
     {
 
     }
@@ -12,9 +15,12 @@ public:
     {
 
     }
+
+
 };
 
 int main()
 {
-    std::cout << "Hello World!\n";
+
+    return 0;
 }
