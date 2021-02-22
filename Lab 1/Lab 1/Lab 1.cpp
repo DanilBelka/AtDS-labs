@@ -4,19 +4,25 @@ template <typename T>
 class sortedList
 {
 public:
-    myList(T newData = NULL)
+    myList(bool (*compare)(T))
     {
-        head = new node();
-        head->data = newData;
-        size++;
+        comporator = compare;
     }
     ~myList()
     {
 
     }
 
+
+    size_t getSize()
+    {
+        return size;
+    }
+
+
 private:
     node* head = nullptr;
+    bool (*comporator)(T) = nullptr;
     size_t size = 0;
 
     struct node
