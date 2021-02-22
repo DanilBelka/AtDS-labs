@@ -4,19 +4,25 @@ template <typename T>
 class sortedList
 {
 public:
-    T data;
-    sortedList* next;
 
-    myList(T newData)
+    struct node
     {
+    public:
+        T data;
+        node* next;
+    };
 
+    myList(T newData = NULL)
+    {
+        data = newData;
     }
     ~myList()
     {
 
     }
 
-
+private:
+    bool* compare;
 };
 
 int main()
