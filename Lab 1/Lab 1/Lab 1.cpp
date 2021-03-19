@@ -39,6 +39,23 @@ public:
     {
         return size;
     }
+
+    int indexOf(T searchData)
+    {
+        node temp = head;
+        unsigned int counter = 0;
+
+        while (comporator(searchData, temp.data) && temp.next != nullptr)
+        {
+            counter++;
+            temp = temp.next
+        }
+
+        if (temp.data == searchData)
+            return counter;
+        else
+            return -1;
+    }
 };
 
 int main()
