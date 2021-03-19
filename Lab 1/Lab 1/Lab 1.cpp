@@ -44,6 +44,7 @@ public:
         {
             head = new node;
             head->data = newData;
+            head->next = nullptr;
             size++;
         }
         else
@@ -89,36 +90,29 @@ public:
     }
 };
 
+template <typename T>
+void printList(sortedList<T> list)
+{
+    for (unsigned int i = 0; i < list.getSize(); i++)
+        std::cout << list[i] << ", ";
+    std::cout << std::endl;
+}
+
 int main()
 {
     sortedList<int> myList([](int a, int b) { return (a > b); });
 
     myList.addElement(1);
-    for (int i = 0; i < myList.getSize(); i++)
-    {
-        std::cout << myList[i] << ", ";
-    }
-    std::cout << std::endl;
+    printList(myList);
 
     myList.addElement(4);
-    for (int i = 0; i < myList.getSize(); i++)
-    {
-        std::cout << myList[i] << ", ";
-    }
-    std::cout << std::endl;
+    printList(myList);
 
     myList.addElement(2);
-    for (int i = 0; i < myList.getSize(); i++)
-    {
-        std::cout << myList[i] << ", ";
-    }
-    std::cout << std::endl;
+    printList(myList);
 
     myList.addElement(3);
-    for (int i = 0; i < myList.getSize(); i++)
-    {
-        std::cout << myList[i] << ", ";
-    }
+    printList(myList);
 
 
     return 0;
