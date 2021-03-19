@@ -40,30 +40,41 @@ public:
 
     void addElement(T newData)
     {
-        node tempNode = this.head;
-        while (comporator(newData, tempNode.data) && tempNode.next != nullptr)
-            tempNode = tempNode.next;
+        if (size == 0)
+        {
+            head = new node;
+            head->data = newData;
+            size++;
+        }
+        else
+        {
+            node* tempNode = head;
+            while (comporator(newData, tempNode->data) && tempNode->next != nullptr)
+                tempNode = tempNode->next;
 
-        T tempData = tempNode.data;
-        tempNode.data = newData;
-        node* newNode = new node;
-        newNode.data = tempData;
-        newNode.next = tempNode.next;
-        tempNode.next = newNode;
+            T tempData = tempNode->data;
+            tempNode->data = newData;
+            node* newNode = new node;
+            newNode->data = tempData;
+            newNode->next = tempNode->next;
+            tempNode->next = newNode;
+
+            size++;
+        }
     }
 
     T operator[](unsigned int i)
     {
         node* temp = head;
         for (unsigned int j = 0; j < i; j++)
-            temp = temp.next;
+            temp = temp->next;
 
-        return temp.data;
+        return temp->data;
     }
 
     int indexOf(T searchData)
     {
-        node temp = this.head;
+        node* temp = head;
         unsigned int counter = 0;
 
         while (comporator(searchData, temp.data) && temp.next != nullptr)
