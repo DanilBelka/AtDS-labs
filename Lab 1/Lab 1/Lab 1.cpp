@@ -14,8 +14,6 @@ private:
         {
             if(next != nullptr)
                 delete next;
-
-            delete comporator;
         }
     };
 
@@ -24,11 +22,11 @@ private:
     size_t size = 0;
 
 public:
-    myList(bool (*compare)(T, T))
+    sortedList(bool (*compare)(T a, T b))
     {
         comporator = compare;
     }
-    ~myList()
+    ~sortedList()
     {
         if(head != nullptr)
             delete head;
@@ -56,7 +54,7 @@ public:
 
     T operator[](unsigned int i)
     {
-        node temp = this.head;
+        node* temp = head;
         for (unsigned int j = 0; j < i; j++)
             temp = temp.next;
 
@@ -71,7 +69,7 @@ public:
         while (comporator(searchData, temp.data) && temp.next != nullptr)
         {
             counter++;
-            temp = temp.next
+            temp = temp.next;
         }
 
         if (temp.data == searchData)
@@ -83,6 +81,11 @@ public:
 
 int main()
 {
+    sortedList<int> myList([](int a, int b) { return (a > b); });
+
+    myList.addElement(1);
+
+    std::cout << myList[0] << '\n';
 
     return 0;
 }
