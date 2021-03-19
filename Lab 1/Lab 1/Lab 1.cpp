@@ -40,9 +40,32 @@ public:
         return size;
     }
 
+    void addElement(T newData)
+    {
+        node tempNode = this.head;
+        while (comporator(newData, tempNode.data) && tempNode.next != nullptr)
+            tempNode = tempNode.next;
+
+        T tempData = tempNode.data;
+        tempNode.data = newData;
+        node* newNode = new node;
+        newNode.data = tempData;
+        newNode.next = tempNode.next;
+        tempNode.next = newNode;
+    }
+
+    T operator[](unsigned int i)
+    {
+        node temp = this.head;
+        for (unsigned int j = 0; j < i; j++)
+            temp = temp.next;
+
+        return temp.data;
+    }
+
     int indexOf(T searchData)
     {
-        node temp = head;
+        node temp = this.head;
         unsigned int counter = 0;
 
         while (comporator(searchData, temp.data) && temp.next != nullptr)
