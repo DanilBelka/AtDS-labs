@@ -52,12 +52,11 @@ public:
             while (comporator(newData, tempNode->data) && tempNode->next != nullptr)
                 tempNode = tempNode->next;
 
-            T tempData = tempNode->data;
-            tempNode->data = newData;
             node* newNode = new node;
-            newNode->data = tempData;
             newNode->next = tempNode->next;
+            newNode->data = tempNode->data;
             tempNode->next = newNode;
+            tempNode->data = newData;
 
             size++;
         }
@@ -95,8 +94,32 @@ int main()
     sortedList<int> myList([](int a, int b) { return (a > b); });
 
     myList.addElement(1);
+    for (int i = 0; i < myList.getSize(); i++)
+    {
+        std::cout << myList[i] << ", ";
+    }
+    std::cout << std::endl;
 
-    std::cout << myList[0] << '\n';
+    myList.addElement(4);
+    for (int i = 0; i < myList.getSize(); i++)
+    {
+        std::cout << myList[i] << ", ";
+    }
+    std::cout << std::endl;
+
+    myList.addElement(2);
+    for (int i = 0; i < myList.getSize(); i++)
+    {
+        std::cout << myList[i] << ", ";
+    }
+    std::cout << std::endl;
+
+    myList.addElement(3);
+    for (int i = 0; i < myList.getSize(); i++)
+    {
+        std::cout << myList[i] << ", ";
+    }
+
 
     return 0;
 }
