@@ -9,6 +9,14 @@ private:
     public:
         T data;
         node* next = nullptr;
+
+        ~node()
+        {
+            if(next != nullptr)
+                delete next;
+
+            delete comporator;
+        }
     };
 
     node* head = nullptr;
@@ -22,7 +30,8 @@ public:
     }
     ~myList()
     {
-
+        if(head != nullptr)
+            delete head;
     }
 
 
