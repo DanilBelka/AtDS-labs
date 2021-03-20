@@ -7,7 +7,7 @@ private:
     struct node
     {
     public:
-        T data;
+        T data = NULL;
         node* next = nullptr;
 
         ~node()
@@ -25,11 +25,6 @@ public:
     sortedList(bool (*compare)(T a, T b))
     {
         comporator = compare;
-    }
-    ~sortedList()
-    {
-        if(head != nullptr)
-            delete head;
     }
 
 
@@ -50,14 +45,45 @@ public:
         else
         {
             node* tempNode = head;
-            while (comporator(newData, tempNode->data) && tempNode->next != nullptr)
-                tempNode = tempNode->next;
+            
+            if (comporator(newData, head->data))
+            {
+                node* newNode = new node;
+                newNode->next = head->next;
+                newNode->data = head->data;
 
-            node* newNode = new node;
-            newNode->next = tempNode->next;
-            newNode->data = tempNode->data;
-            tempNode->next = newNode;
-            tempNode->data = newData;
+                head->next = newNode;
+                head->data = newData;
+            }
+            else
+            {
+                while (!comporator(tempNode->data, newData) && tempNode->next != nullptr)
+                    tempNode = tempNode->next;
+                if (tempNode->next != nullptr)
+                {
+                    while (tempNode->next != nullptr)
+                    {
+                        if (comporator(newData, tempNode->next->data))
+                            break;
+                        else
+                            tempNode = tempNode->next;
+                    }
+                        
+
+                    node* newNode = new node;
+                    newNode->next = tempNode->next;
+                    newNode->data = newData;
+
+                    tempNode->next = newNode;
+                }
+                else
+                {
+                    node* newNode = new node;
+                    newNode->data = newData;
+                    tempNode->next = newNode;
+                }
+                
+            }
 
             size++;
         }
@@ -91,10 +117,10 @@ public:
 };
 
 template <typename T>
-void printList(sortedList<T> list)
+void printList(sortedList<T>* list)
 {
-    for (unsigned int i = 0; i < list.getSize(); i++)
-        std::cout << list[i] << ", ";
+    for (unsigned int i = 0; i < list->getSize(); i++)
+        std::cout << (*list)[i] << ", ";
     std::cout << std::endl;
 }
 
@@ -103,16 +129,22 @@ int main()
     sortedList<int> myList([](int a, int b) { return (a > b); });
 
     myList.addElement(1);
-    printList(myList);
+    printList(&myList);
 
     myList.addElement(4);
-    printList(myList);
+    printList(&myList);
 
     myList.addElement(2);
-    printList(myList);
+    printList(&myList);
 
     myList.addElement(3);
-    printList(myList);
+    printList(&myList);
+
+    myList.addElement(7);
+    printList(&myList);
+
+    myList.addElement(4);
+    printList(&myList);
 
 
     return 0;
