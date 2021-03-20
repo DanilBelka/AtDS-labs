@@ -4,12 +4,14 @@ template <typename T>
 class sortedList
 {
 private:
+    //structure for elements of list
     struct node
     {
     public:
         T data = NULL;
         node* next = nullptr;
 
+        //recursive destructor
         ~node()
         {
             if(next != nullptr)
@@ -17,8 +19,8 @@ private:
         }
     };
 
-    node* head = nullptr;
-    bool (*comporator)(T, T) = nullptr;
+    node* head = nullptr;               //first element of list
+    bool (*comporator)(T, T) = nullptr; //function pointer for sorting
     size_t size = 0;
 
 public:
@@ -35,6 +37,7 @@ public:
 
     void addElement(T newData)
     {
+        //better is not to touch this method :|
         if (size == 0)
         {
             head = new node;
@@ -129,6 +132,7 @@ public:
         size--;
     }
 
+    //there is not link T cause there is only getter must be
     T operator[](unsigned int i)
     {
         node* temp = head;
@@ -138,6 +142,7 @@ public:
         return temp->data;
     }
 
+    // if there is no such element returns -1
     int indexOf(T searchData)
     {
         node* tempNode = head;
@@ -174,34 +179,31 @@ int main()
 {
     sortedList<int> myList([](int a, int b) { return (a > b); });
 
-    std::cout << myList.isEmpty() << '\n';
 
-    myList.addElement(1);
+    myList.addElement(1); // 1
     printList(&myList);
 
-    myList.addElement(4);
+    myList.addElement(4); // 4, 1
     printList(&myList);
 
-    myList.addElement(2);
+    myList.addElement(2); // 4, 2, 1
     printList(&myList);
 
-    myList.addElement(3);
+    myList.addElement(3); // 4, 3, 2, 1
     printList(&myList);
 
-    myList.addElement(7);
+    myList.addElement(7); // 7, 4, 3, 2, 1
     printList(&myList);
 
-    myList.addElement(4);
+    myList.addElement(4); // 7, 4, 4, 3, 2, 1
     printList(&myList);
 
-    myList.deleteElement(2);
+    myList.deleteElement(2); // 7, 4, 3, 2, 1
     printList(&myList);
 
-    std::cout << myList.indexOf(3) << '\n';
-    std::cout << myList.indexOf(7) << '\n';
-    std::cout << myList.indexOf(1) << '\n';
-
-    std::cout << myList.isEmpty() << '\n';
+    std::cout << myList.indexOf(3) << '\n'; // 2
+    std::cout << myList.indexOf(7) << '\n'; // 0
+    std::cout << myList.indexOf(1) << '\n'; // 4
 
 
     return 0;
