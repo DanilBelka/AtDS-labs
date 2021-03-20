@@ -158,6 +158,8 @@ public:
 
         return index;
     }
+
+    bool isEmpty() { return (size == 0) ? true : false; }
 };
 
 template <typename T>
@@ -171,6 +173,8 @@ void printList(sortedList<T>* list)
 int main()
 {
     sortedList<int> myList([](int a, int b) { return (a > b); });
+
+    std::cout << myList.isEmpty() << '\n';
 
     myList.addElement(1);
     printList(&myList);
@@ -196,6 +200,9 @@ int main()
     std::cout << myList.indexOf(3) << '\n';
     std::cout << myList.indexOf(7) << '\n';
     std::cout << myList.indexOf(1) << '\n';
+
+    std::cout << myList.isEmpty() << '\n';
+
 
     return 0;
 }
