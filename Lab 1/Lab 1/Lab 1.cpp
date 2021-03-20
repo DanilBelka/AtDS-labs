@@ -140,19 +140,23 @@ public:
 
     int indexOf(T searchData)
     {
-        node* temp = head;
-        unsigned int counter = 0;
-
-        while (comporator(searchData, temp.data) && temp.next != nullptr)
+        node* tempNode = head;
+        unsigned int index = -1;
+        while (tempNode != nullptr)
         {
-            counter++;
-            temp = temp.next;
+            if (tempNode->data == searchData)
+            {
+                index++;
+                break;
+            }
+            else
+            {
+                tempNode = tempNode->next;
+                index++;
+            }
         }
 
-        if (temp.data == searchData)
-            return counter;
-        else
-            return -1;
+        return index;
     }
 };
 
@@ -190,6 +194,8 @@ int main()
     printList(&myList);
 
     std::cout << myList.indexOf(3) << '\n';
+    std::cout << myList.indexOf(7) << '\n';
+    std::cout << myList.indexOf(1) << '\n';
 
     return 0;
 }
