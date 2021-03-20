@@ -168,6 +168,13 @@ public:
         return index;
     }
 
+    void cleanList()
+    {
+        delete head->next;
+        head = nullptr;
+        size = 0;
+    }
+
     bool isEmpty() { return (size == 0) ? true : false; }
 };
 
@@ -208,6 +215,9 @@ int main()
     std::cout << myList.indexOf(3) << '\n'; // 2
     std::cout << myList.indexOf(7) << '\n'; // 0
     std::cout << myList.indexOf(1) << '\n'; // 4
+
+    myList.cleanList();
+    std::cout << myList.isEmpty();
 
 
     return 0;
