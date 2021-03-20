@@ -28,6 +28,10 @@ public:
     {
         comporator = compare;
     }
+    ~sortedList()
+    {
+        delete head;
+    }
 
 
     size_t getSize()
