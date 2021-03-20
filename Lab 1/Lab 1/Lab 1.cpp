@@ -89,6 +89,46 @@ public:
         }
     }
 
+    void deleteElement(unsigned int index)
+    {
+        if (index < size)
+        {
+            if (index == 0)
+            {
+                node* toDelete = head;
+                head = head->next;
+
+                toDelete->next = nullptr;
+                delete toDelete;
+            }
+            else if (index == size - 1)
+            {
+                node* toDelete = head;
+                for (unsigned int i = 0; i <= index; i++)
+                    toDelete = toDelete->next;
+
+                delete toDelete;
+            }
+            else
+            {
+                node* toDelete = head;
+                node* prev = nullptr;
+                for (unsigned int i = 0; i < index; i++)
+                {
+                    prev = toDelete;
+                    toDelete = toDelete->next;
+                }
+
+                prev->next = toDelete->next;
+                toDelete->next = nullptr;
+
+                delete toDelete;
+            }
+        }
+
+        size--;
+    }
+
     T operator[](unsigned int i)
     {
         node* temp = head;
@@ -146,6 +186,10 @@ int main()
     myList.addElement(4);
     printList(&myList);
 
+    myList.deleteElement(2);
+    printList(&myList);
+
+    std::cout << myList.indexOf(3) << '\n';
 
     return 0;
 }
