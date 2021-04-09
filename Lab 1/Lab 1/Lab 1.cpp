@@ -176,6 +176,15 @@ public:
     }
 
     bool isEmpty() { return (size == 0) ? true : false; }
+
+    sortedList<T>* copyReverse()
+    {
+        sortedList<T>* L1 = new sortedList([](int a, int b) {return (a > b); });
+        for (unsigned int i = 0; i < this->getSize(); i++)
+            L1->addElement((*this)[i]);
+
+        return L1;
+    }
 };
 
 template <typename T>
@@ -216,8 +225,12 @@ int main()
     std::cout << myList.indexOf(7) << '\n'; // 0
     std::cout << myList.indexOf(1) << '\n'; // 4
 
-    myList.cleanList();
+    //myList.cleanList();
     std::cout << myList.isEmpty();
+    std::cout << '\n';
+
+    sortedList<int> L1 = *(myList.copyReverse());
+    printList(&L1);
 
 
     return 0;
